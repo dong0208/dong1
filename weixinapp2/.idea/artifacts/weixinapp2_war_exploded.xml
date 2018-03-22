@@ -4,9 +4,11 @@
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="weixinapp2" />
+          <element id="module-output" name="myBatis" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.4.5" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.40" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: junit:junit:4.12" />
           <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-core:1.3" />
@@ -16,7 +18,7 @@
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/weixinapp2/META-INF/MANIFEST.MF" />
       </element>
-      <element id="javaee-facet-resources" facet="weixinapp2/web/Web" />
+      <element id="javaee-facet-resources" facet="myBatis/web/Web" />
     </root>
   </artifact>
 </component>
