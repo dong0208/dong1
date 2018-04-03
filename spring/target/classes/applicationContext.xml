@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+   <!-- <bean id="userDao" class="com.dong.dao.UserDao"/>-->
+    <!--set的主要注入方式-->
+  <!--  <bean id="userService" class="com.dong.service.UserService">
+        <property name="userDao" ref="userDao"/>
+    </bean>-->
+    <!--set的更多注入方式-->
+   <!-- <bean id="userService" class="com.dong.service.UserService">
+        <property name="userDao">
+            <ref bean="userDao"/>
+        </property>
+    </bean>-->
+   <!-- <bean id="userService" class="com.dong.service.UserService">
+        <property name="userDao">
+            <bean class="com.dong.dao.UserDao"/>
+        </property>
+    </bean>-->
+    <!--<bean id="userDao" class="com.dong.dao.UserDao"/>
+    <bean id="userService" class="com.dong.service.UserService" p:userDao-ref="userDao"/>-->
+    <!--<bean id="studentDao" class="com.dong.dao.StudentDao">
+
+        <property name="id" value="123"/>
+        <property name="name" value="刘备"/>
+        <property name="score" value="96.3"/>
+        <property name="nameList">
+            <list>
+                <value>qqww</value>
+                <value>eerr</value>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="abc" value-ref="studentDao"/>
+                <entry key="asd" value-ref="studentDao"/>
+            </map>
+        </property>
+        <property name="numSet">
+            <set>
+                <value>123</value>
+                <value>145</value>
+            </set>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="k1">v1</prop>
+                <prop key="k2">v2</prop>
+            </props>
+        </property>
+    </bean>-->
+    <!--自动注入-->
+<!--    <bean id="userDao" class="com.dong.dao.UserDao"/>
+    <bean id="userService" class="com.dong.service.UserService" autowire="constructor"/>-->
+
+</beans>

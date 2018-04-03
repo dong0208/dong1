@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+   <!-- aop的通知类-->
+    <bean id="aopAdvice" class="com.dong.aop.Advice"/>
+    <bean id="mp3" class="com.dong.pro.Mp3"/>
+    <aop:config>
+        <aop:aspect ref="aopAdvice">
+            <aop:pointcut id="myPointcut" expression="execution(* com.dong.pro.Mp3.*(..))"/>
+          <!--  <aop:before method="beforeAdvice" pointcut-ref="myPointcut"/>
+            <aop:after-returning method="afterAdvice" pointcut-ref="myPointcut" returning="result"/>
+            <aop:after-throwing method="exceptionAdvice" pointcut-ref="myPointcut" throwing="e"/>
+            <aop:after method="finnallyAdvice" pointcut-ref="myPointcut"/>-->
+            <aop:around method="aroundAdcice" pointcut-ref="myPointcut"/>
+
+        </aop:aspect>
+    </aop:config>
+
+
+</beans>

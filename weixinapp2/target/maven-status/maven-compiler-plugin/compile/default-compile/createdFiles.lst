@@ -1,1 +1,8 @@
+com\dong\entity\Movie.class
+com\dong\mapper\UserMapper.class
+com\dong\entity\Tag.class
 com\dong\entity\User.class
+com\dong\util\SqlSessionFactoryUtil.class
+com\dong\entity\School.class
+com\dong\entity\Student.class
+com\dong\mapper\MovieMapper.class

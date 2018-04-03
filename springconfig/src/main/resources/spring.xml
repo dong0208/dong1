@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+        <context:component-scan base-package="com.dong"/>
+    <!--开启基于注解的AOP-->
+        <aop:aspectj-autoproxy/>
+        <!--读取配置文件config.properties-->
+        <context:property-placeholder location="config.properties"/>
+        <!--创建数据库连接池-->
+        <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+                <property name="driverClassName" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+                <property name="initialSize" value="${jdbc.initSize}"/>
+                <property name="maxTotal" value="${jdbc.maxSixe}"/>
+                <property name="maxWaitMillis" value="${jdbc.maxWait}"/>
+        </bean>
+        <!--创建jdbctemplate-->
+        <bean id="jdbctemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+                <property name="dataSource" ref="dataSource"/>
+        </bean>
+        <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+                <constructor-arg name="dataSource" ref="dataSource"/>
+        </bean>
+</beans>

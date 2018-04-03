@@ -27,5 +27,8 @@
     <mappers>
         <!--classpath路径：源代码根目录-->
         <mapper resource="mapper/UserMapper.xml"/>
+        <!--<mapper resource="mapper/StudentMapper.xml"/>-->
+        <mapper resource="mapper/MovieMapper.xml"/>
+       <!-- <mapper resource="mapper/SchoolMapper.xml"/>-->
     </mappers>
 </configuration>
