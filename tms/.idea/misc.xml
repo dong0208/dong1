@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/tms-finance-web" />
+    <file type="web" url="file://$PROJECT_DIR$/tms-manager-web" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/tms-commons/pom.xml" />
+        <option value="$PROJECT_DIR$/tms-service/pom.xml" />
+        <option value="$PROJECT_DIR$/tms-service-impl/pom.xml" />
+        <option value="$PROJECT_DIR$/tms-manager-web/pom.xml" />
+        <option value="$PROJECT_DIR$/tms-finance-web/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectResources">
+    <resource url="http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" location="F:/idear/dtb/mybatis-generator-config_1_0.dtd" />
+  </component>
+  <component name="ProjectRootManager">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

@@ -1,0 +1,4 @@
+com\kaishengit\tms\controller\RoleController.class
+com\kaishengit\tms\controller\HomeController.class
+com\kaishengit\tms\controller\PermissionController.class
+com\kaishengit\tms\controller\AccountController.class
