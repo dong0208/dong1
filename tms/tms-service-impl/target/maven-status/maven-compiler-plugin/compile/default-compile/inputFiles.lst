@@ -1,8 +1,8 @@
-G:\gitwork\tms\tms-service-impl\src\main\java\com\kaishengit\tms\mapper\RoleMapper.java
 G:\gitwork\tms\tms-service-impl\src\main\java\com\kaishengit\tms\mapper\AccountMapper.java
-G:\gitwork\tms\tms-service-impl\src\main\java\com\kaishengit\tms\mapper\PremissionMapper.java
+G:\gitwork\tms\tms-service-impl\src\main\java\com\kaishengit\tms\mapper\AccountRolesMapper.java
+G:\gitwork\tms\tms-service-impl\src\main\java\com\kaishengit\tms\mapper\RolesPermissionMapper.java
 G:\gitwork\tms\tms-service-impl\src\main\java\com\kaishengit\tms\service\impl\AccountServiceImpl.java
-G:\gitwork\tms\tms-service-impl\src\main\java\com\kaishengit\tms\mapper\RolePremissionMapper.java
-G:\gitwork\tms\tms-service-impl\src\main\java\com\kaishengit\tms\service\impl\RolePremissionServiceImpl.java
+G:\gitwork\tms\tms-service-impl\src\main\java\com\kaishengit\tms\mapper\PermissionMapper.java
+G:\gitwork\tms\tms-service-impl\src\main\java\com\kaishengit\tms\mapper\RolesMapper.java
 G:\gitwork\tms\tms-service-impl\src\main\java\com\kaishengit\tms\mapper\AccountLoginLogMapper.java
-G:\gitwork\tms\tms-service-impl\src\main\java\com\kaishengit\tms\mapper\AccountRoleMapper.java
+G:\gitwork\tms\tms-service-impl\src\main\java\com\kaishengit\tms\service\impl\RolePermissionServiceImpl.java

@@ -3,11 +3,12 @@ package com.kaishengit.tms.service.impl;
 import com.kaishengit.tms.entity.Account;
 import com.kaishengit.tms.entity.AccountExample;
 import com.kaishengit.tms.entity.AccountLoginLog;
-import com.kaishengit.tms.entity.AccountRoleKey;
+
+import com.kaishengit.tms.entity.AccountRolesKey;
 import com.kaishengit.tms.exception.ServiceException;
 import com.kaishengit.tms.mapper.AccountLoginLogMapper;
 import com.kaishengit.tms.mapper.AccountMapper;
-import com.kaishengit.tms.mapper.AccountRoleMapper;
+import com.kaishengit.tms.mapper.AccountRolesMapper;
 import com.kaishengit.tms.service.AccountService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
@@ -33,7 +34,7 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountLoginLogMapper accountLoginLogMapper;
     @Autowired
-    private AccountRoleMapper accountRoleMapper;
+    private AccountRolesMapper accountRolesMapper;
     /*
      *
      * @date 2018/4/12
@@ -87,6 +88,7 @@ public class AccountServiceImpl implements AccountService {
         return accountMapper.findAllWithRolesByQueryParam(requestParam);
     }
 
+
     /**
      * 新增账号
      *
@@ -116,11 +118,11 @@ public class AccountServiceImpl implements AccountService {
 
         //添加账号和角色的对应关系表
         for(Integer roleId : rolesIds) {
-            AccountRoleKey accountRolesKey = new AccountRoleKey();
+            AccountRolesKey accountRolesKey = new AccountRolesKey();
             accountRolesKey.setAccountId(account.getId());
-            accountRolesKey.setRoleId(roleId);
+            accountRolesKey.setRolesId(roleId);
 
-            accountRoleMapper.insert(accountRolesKey);
+            accountRolesMapper.insert(accountRolesKey);
         }
     }
 

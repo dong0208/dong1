@@ -109,7 +109,7 @@
       #{accountPassword,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{accountState,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.kaishengit.tms.entity.Account">
+  <insert id="insertSelective" parameterType="com.kaishengit.tms.entity.Account" useGeneratedKeys="true" keyProperty="id">
     insert into account
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -166,24 +166,25 @@
   </select>
     <select id="findAllWithRolesByQueryParam" resultType="com.kaishengit.tms.entity.Account">
       SELECT
-      account.*, role.id AS roleId,
-      role.role_name,
-      role.create_time AS roleCreateTime,
-      role.update_time AS roleUpdateTime
+      account.*, roles.id AS rolesId,
+      roles.roles_code,
+      roles.roles_name,
+      roles.create_time AS rolesCreateTime,
+      roles.update_time AS rolesUpdateTime
       FROM
       account
-      LEFT JOIN account_role ON account.id = account_role.account_id
-      LEFT JOIN role ON role.id = account_role.role_id
+      LEFT JOIN account_roles ON account.id = account_roles.account_id
+      LEFT JOIN roles ON roles.id = account_roles.roles_id
       <choose>
-        <when test="roleId != null and roleId != 0">
+        <when test="rolesId != null and rolesId != 0">
           inner JOIN (
           SELECT
           id
           FROM
           account
-          INNER JOIN account_role ON account_role.account_id = account.id
+          INNER JOIN account_roles ON account_roles.account_id = account.id
           <where>
-            account_role.role_id = #{roleId}
+            account_roles.roles_id = #{rolesId}
             <if test="nameMobile != null and nameMobile != ''">
               and( (account.account_name like concat('%',#{nameMobile},'%'))
               or

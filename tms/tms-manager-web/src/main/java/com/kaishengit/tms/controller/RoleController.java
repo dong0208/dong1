@@ -1,7 +1,7 @@
 package com.kaishengit.tms.controller;
 
-import com.kaishengit.tms.entity.Role;
-import com.kaishengit.tms.service.RolePremissionService;
+import com.kaishengit.tms.entity.Roles;
+import com.kaishengit.tms.service.RolePermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,14 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/manage/role")
+@RequestMapping("/manage/roles")
 public class RoleController {
     @Autowired
-    private RolePremissionService rolePremissionService;
+    private RolePermissionService rolePermissionService;
 
     @GetMapping
     public String home() {
-        return "manage/role/home";
+        return "manage/roles/home";
     }
 
     /*
@@ -29,15 +29,15 @@ public class RoleController {
      */
     @GetMapping("/new")
     public String newRole(Model model) {
-        model.addAttribute("premissionList", rolePremissionService.findAllPermission());
-        return "manage/role/new";
+        model.addAttribute("permissionList", rolePermissionService.findAllPermission());
+        return "manage/roles/new";
     }
 
     @PostMapping("/new")
-    public String newRole(Role role, Integer[] premissionId, RedirectAttributes redirectAttributes){
-        rolePremissionService.saveRole(role,premissionId);
+    public String newRole(Roles roles, Integer[] permissionId, RedirectAttributes redirectAttributes){
+        rolePermissionService.saveRole(roles,permissionId);
         redirectAttributes.addFlashAttribute("message","新增成功");
-        return "redirect:/manage/role";
+        return "redirect:/manage/roles";
     }
 
 }

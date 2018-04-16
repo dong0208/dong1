@@ -10,7 +10,7 @@ public interface AccountLoginLogMapper {
 
     int deleteByExample(AccountLoginLogExample example);
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(Long id);
 
     int insert(AccountLoginLog record);
 
@@ -18,7 +18,7 @@ public interface AccountLoginLogMapper {
 
     List<AccountLoginLog> selectByExample(AccountLoginLogExample example);
 
-    AccountLoginLog selectByPrimaryKey(Integer id);
+    AccountLoginLog selectByPrimaryKey(Long id);
 
     int updateByExampleSelective(@Param("record") AccountLoginLog record, @Param("example") AccountLoginLogExample example);
 

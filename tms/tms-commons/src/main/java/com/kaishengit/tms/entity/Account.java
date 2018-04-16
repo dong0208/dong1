@@ -9,39 +9,46 @@ import java.util.List;
  * @author 
  */
 public class Account implements Serializable {
+
     public static final String STATE_NORMAL = "正常";
     public static final String STATE_DISABLE = "禁用";
     public static final String STATE_LOCKED = "锁定";
+    /**
+     * 主键，un表示无符号，没有负数
+
+     */
     private Integer id;
 
+    /**
+     * 账号名称
+     */
     private String accountName;
 
+    /**
+     * 用户手机号
+     */
     private String accountMobile;
 
     /**
-     * 登录密码
+     * 密码使用md5加密
      */
     private String accountPassword;
 
+    /**
+     * 用户创建时间
+     */
     private Date createTime;
 
+    /**
+     * 账户更新时间
+     */
     private Date updateTime;
 
-    public List<Role> getRolesList() {
-        return rolesList;
-    }
-
-    public void setRolesList(List<Role> rolesList) {
-        this.rolesList = rolesList;
-    }
-
-    private List<Role> rolesList;
-
-
     /**
-     * 状态
+     * 账号状态
      */
     private String accountState;
+    private List<Roles> rolesList;
 
     private static final long serialVersionUID = 1L;
 
@@ -97,6 +104,18 @@ public class Account implements Serializable {
         return accountState;
     }
 
+    public void setAccountState(String accountState) {
+        this.accountState = accountState;
+    }
+
+    public List<Roles> getRolesList() {
+        return rolesList;
+    }
+
+    public void setRolesList(List<Roles> rolesList) {
+        this.rolesList = rolesList;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -108,9 +127,5 @@ public class Account implements Serializable {
                 ", updateTime=" + updateTime +
                 ", accountState='" + accountState + '\'' +
                 '}';
-    }
-
-    public void setAccountState(String accountState) {
-        this.accountState = accountState;
     }
 }

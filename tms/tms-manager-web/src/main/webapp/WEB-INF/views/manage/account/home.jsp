@@ -41,7 +41,7 @@
                         <select name="rolesId" class="form-control">
                             <option value="">所有账号</option>
                             <c:forEach items="${rolesList}" var="roles">
-                                <option value="${role.id}" ${param.rolesId == role.id ? 'selected' : ''}>${role.roleName}</option>
+                                <option value="${roles.id}" ${param.rolesId == roles.id ? 'selected' : ''}>${roles.rolesName}</option>
                             </c:forEach>
                         </select>
                         <button class="btn btn-default">搜索</button>
@@ -74,8 +74,8 @@
                                 <td>${account.accountName}</td>
                                 <td>${account.accountMobile}</td>
                                 <td>
-                                    <c:forEach items="${account.rolesList}" var="role">
-                                        ${role.roleName}
+                                    <c:forEach items="${account.rolesList}" var="roles">
+                                        ${roles.rolesName}
                                     </c:forEach>
                                 </td>
                                 <td>

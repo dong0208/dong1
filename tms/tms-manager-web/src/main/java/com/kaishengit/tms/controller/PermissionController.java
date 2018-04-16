@@ -1,7 +1,8 @@
 package com.kaishengit.tms.controller;
 
-import com.kaishengit.tms.entity.Premission;
-import com.kaishengit.tms.service.RolePremissionService;
+
+import com.kaishengit.tms.entity.Permission;
+import com.kaishengit.tms.service.RolePermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +19,10 @@ import java.util.List;
  * @date 2018/4/13
  */
 @Controller
-@RequestMapping("/manage/premission")
+@RequestMapping("/manage/permission")
 public class PermissionController {
     @Autowired
-    private RolePremissionService rolePremissionService;
+    private RolePermissionService rolePermissionService;
     /*  
      *权限的首页
      * @date 2018/4/13
@@ -30,9 +31,9 @@ public class PermissionController {
      */ 
     @GetMapping
     public String home(Model model){
-       List<Premission> premissionList = rolePremissionService.findAllPermission();
-        model.addAttribute("premissionList",premissionList);
-        return "/manage/premission/home";
+       List<Permission> permissionList = rolePermissionService.findAllPermission();
+        model.addAttribute("permissionList",permissionList);
+        return "manage/permission/home";
     }
     /*  
      *新增权限
@@ -41,18 +42,18 @@ public class PermissionController {
      * @return java.lang.String  
      */ 
     @GetMapping("/new")
-    public  String newPremission(Model model){
+    public  String newPermission(Model model){
         //查询菜单类型的权限列表
-        List<Premission> premissionList = rolePremissionService.findPremissionByPremissionType(Premission.MENU_TYPE);
-        model.addAttribute("premissionList",premissionList);
+        List<Permission> permissionList = rolePermissionService.findPermissionByPermissionType(Permission.MENU_TYPE);
+        model.addAttribute("permissionList",permissionList);
 
-        return "manage/premission/new";
+        return "manage/permission/new";
     }
     @PostMapping("/new")
-    public  String newPremission(Premission premission, RedirectAttributes redirectAttributes){
-            rolePremissionService.savePression(premission);
+    public  String newPermission(Permission permission, RedirectAttributes redirectAttributes){
+            rolePermissionService.savePermission(permission);
             redirectAttributes.addFlashAttribute("message","新增权限成功");
-            return "redirect:/manage/premission";
+            return "redirect:/manage/permission";
 
     }
 

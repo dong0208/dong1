@@ -50,9 +50,9 @@
                         <div class="form-group">
                             <label>角色</label>
                             <div>
-                                <c:forEach items="${rolesList}" var="role">
+                                <c:forEach items="${rolesList}" var="roles">
                                     <div class="checkbox-inline">
-                                        <input type="checkbox" value="${role.id}" name="rolesIds"> ${role.roleName}
+                                        <input type="checkbox" value="${roles.id}" name="rolesIds"> ${roles.rolesName}
                                     </div>
                                 </c:forEach>
                             </div>

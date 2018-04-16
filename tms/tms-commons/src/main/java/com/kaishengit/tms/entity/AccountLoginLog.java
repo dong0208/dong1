@@ -8,21 +8,27 @@ import java.util.Date;
  * @author 
  */
 public class AccountLoginLog implements Serializable {
-    private Integer id;
+    private Long id;
 
+    /**
+     * 用户登录ip
+     */
     private String loginIp;
 
+    /**
+     * 用户登录时间
+     */
     private Date loginTime;
 
     private Integer accountId;
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
