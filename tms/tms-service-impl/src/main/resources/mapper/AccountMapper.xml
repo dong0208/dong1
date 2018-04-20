@@ -164,7 +164,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-    <select id="findAllWithRolesByQueryParam" resultType="com.kaishengit.tms.entity.Account">
+    <select id="findAllWithRolesByQueryParam" resultMap="accountWithRolesMap">
       SELECT
       account.*, roles.id AS rolesId,
       roles.roles_code,
@@ -205,6 +205,18 @@
       </choose>
       order by account.id desc
     </select>
+
+
+  <resultMap id="accountWithRolesMap" type="com.kaishengit.tms.entity.Account" extends="BaseResultMap">
+    <collection property="rolesList" ofType="com.kaishengit.tms.entity.Roles">
+      <id property="id" column="rolesId"/>
+      <result property="updateTime" column="rolesUpdateTime"/>
+      <result property="createTime" column="rolesCreateTime"/>
+      <result property="rolesCode" column="roles_code"/>
+      <result property="rolesName" column="roles_name"/>
+    </collection>
+  </resultMap>
+
     <update id="updateByExampleSelective" parameterType="map">
     update account
     <set>

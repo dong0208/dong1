@@ -84,7 +84,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from roles
     where id = #{id,jdbcType=INTEGER}
@@ -100,9 +100,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.kaishengit.tms.entity.Roles">
-    insert into roles (id, roles_name, roles_code, 
+    insert into roles (id, roles_name, roles_code,
       create_time, update_time)
-    values (#{id,jdbcType=INTEGER}, #{rolesName,jdbcType=VARCHAR}, #{rolesCode,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{rolesName,jdbcType=VARCHAR}, #{rolesCode,jdbcType=VARCHAR},
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.kaishengit.tms.entity.Roles" useGeneratedKeys="true" keyProperty="id">
@@ -148,7 +148,73 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+    <select id="findRolesByAccountId" resultType="com.kaishengit.tms.entity.Roles">
+       SELECT
+            *
+        FROM
+            roles
+        WHERE
+            id IN (
+                SELECT
+                    roles_id
+                FROM
+                    account_roles
+                WHERE
+                    account_id = #{accountId}
+            )
+    </select>
+
+    <select id="findAllWithPermission" resultMap="rolesWithPermissionMap">
+        SELECT
+            roles.*, permission.id AS permissionId,
+            permission.create_time AS permissionCreateTime,
+            permission_code,
+            permission_name,
+            permission_type,
+            url,
+            permission.update_time AS permissionUpdateTime,
+            parent_id
+        FROM
+          roles
+      LEFT JOIN roles_permission ON roles.id = roles_permission.roles_id
+      LEFT JOIN permission ON permission.id = roles_permission.permission_id
+      ORDER BY
+          roles.id DESC
+    </select>
+  <select id="findRolesWithPermission" resultMap="rolesWithPermissionMap">
+    SELECT
+            roles.*, permission.id AS permissionId,
+            permission.create_time AS permissionCreateTime,
+            permission_code,
+            permission_name,
+            permission_type,
+            url,
+            permission.update_time AS permissionUpdateTime,
+            parent_id
+        FROM
+            roles
+        LEFT JOIN roles_permission ON roles.id = roles_permission.roles_id
+        LEFT JOIN permission ON permission.id = roles_permission.permission_id
+        where roles.id = #{id}
+  </select>
+
+  <resultMap id="rolesWithPermissionMap" type="com.kaishengit.tms.entity.Roles" extends="BaseResultMap">
+      <collection property="permissionList" ofType="com.kaishengit.tms.entity.Permission">
+        <id property="id" column="permissionId"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="permissionCode" column="permission_code"/>
+        <result property="permissionName" column="permission_name"/>
+        <result property="permissionType" column="permission_type"/>
+        <result property="url" column="url"/>
+        <result property="createTime" column="permissionCreateTime"/>
+        <result property="updateTime" column="permissionUpdateTime"/>
+      </collection>
+    </resultMap>
+
+
+
+
+    <update id="updateByExampleSelective" parameterType="map">
     update roles
     <set>
       <if test="record.id != null">

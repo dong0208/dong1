@@ -40,7 +40,7 @@
                 <div class="box-header">
                     <h3 class="box-title">新增角色</h3>
                     <div class="box-tools">
-                        <a href="/manage/role+" class="btn btn-success btn-sm">返回</a>
+                        <a href="/manage/roles" class="btn btn-success btn-sm">返回</a>
                     </div>
                 </div>
                 <div class="box-body">
@@ -121,7 +121,7 @@
         $('input[type=checkbox]').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
-            increaseArea: '20%' /* optional */
+            increaseArea: '20%'
         });
     })
 </script>

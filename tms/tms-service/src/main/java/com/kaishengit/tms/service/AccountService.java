@@ -1,22 +1,13 @@
 package com.kaishengit.tms.service;
 
 import com.kaishengit.tms.entity.Account;
+import com.kaishengit.tms.entity.AccountLoginLog;
 import com.kaishengit.tms.exception.ServiceException;
 
 import java.util.List;
 import java.util.Map;
 
 public interface AccountService {
-    /*  
-     *系统登录
-     * @date 2018/4/12
-     * @param [accountMobile,手机号码
-      * password,密码
-       * requstIp 登录的IP
-     * @return com.kaishengit.tms.entity.Account  
-     */
-
-    Account login(String accountMobile, String password, String requstIp)throws ServiceException;
 
 
     /**
@@ -35,4 +26,17 @@ public interface AccountService {
  * @return void  
  */ 
     void saveAccount(Account account, Integer[] rolesIds);
+
+    /**
+     * 根据手机号查找登录对象
+     * @param userMobile
+     * @return
+     */
+    Account findByMobile(String userMobile);
+
+    /**
+     * 保存日志
+     * @param accountLoginLog
+     */
+    void saveAccountLoginLog(AccountLoginLog accountLoginLog);
 }

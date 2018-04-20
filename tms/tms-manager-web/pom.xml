@@ -69,7 +69,7 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
-                    <encoding>UTF-8</encoding>
+                    <encoding>GB2312</encoding>
                 </configuration>
             </plugin>
             <!--tomcat插件-->
@@ -83,11 +83,7 @@
                     <uriEncoding>UTF-8</uriEncoding>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.mybatis.generator</groupId>
-                <artifactId>mybatis-generator-maven-plugin</artifactId>
-                <version>1.3.5</version>
-            </plugin>
+
         </plugins>
     </build>
 

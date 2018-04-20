@@ -99,7 +99,6 @@
 <script>
     $(function () {
         $('.tree').treegrid();
-
         $(".delLink").click(function(){
             var id = $(this).attr("rel");
             layer.confirm("确定要删除吗",function (index) {

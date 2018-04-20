@@ -1,5 +1,7 @@
 com\kaishengit\tms\controller\RoleController.class
+com\kaishengit\tms\controller\TicketStoreController.class
 com\kaishengit\tms\shiro\ShiroRealm.class
 com\kaishengit\tms\controller\HomeController.class
 com\kaishengit\tms\controller\PermissionController.class
+com\kaishengit\tms\shiro\CustomerFilterChainDefinition.class
 com\kaishengit\tms\controller\AccountController.class

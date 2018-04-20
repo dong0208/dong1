@@ -37,33 +37,33 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">角色列表</h3>
-                    <div class="box-tools">ah3
+                    <div class="box-tools">
                         <a href="/manage/roles/new" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> 新增角色</a>
                     </div>
                 </div>
                 <div class="box-body">
                     <table class="table tree">
                         <tbody>
-                        <tr class="bg-blue-active">
-                            <td>角色名称：<strong>超级管理员</strong></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <i class="fa fa-circle"></i> 权限查询
-                                <i class="fa fa-circle"></i> 新增权限
-                                <i class="fa fa-circle"></i> 修改权限
-                                <i class="fa fa-circle"></i> 删除权限
-                            </td>
-                        </tr>
-                        <tr class="bg-blue-active">
-                            <td>角色名称：<strong>管理员</strong></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <i class="fa fa-circle"></i> 权限查询
-                                <i class="fa fa-circle"></i> 新增权限
-                            </td>
-                        </tr>
+                            <c:forEach items="${rolesList}" var="roles">
+                                <tr class="bg-aqua-active">
+                                    <td>角色名称：<strong>${roles.rolesName}</strong>
+                                        <span class="pull-right">
+                                    <a style="color: #ffff00;" href="/manage/roles/${roles.id}/edit"><i class="fa fa-pencil"></i></a>
+                                    <a style="color: #ff0000;" class="delLink" rel="${roles.id}" href="javascript:;"><i class="fa fa-trash"></i></a>
+                                </span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <c:forEach items="${roles.permissionList}" var="per">
+                                            <i class="fa fa-circle"></i> ${per.permissionName}
+                                        </c:forEach>
+                                    </td>
+                                </tr>
+
+                            </c:forEach>
+
                         </tbody>
                     </table>
                 </div>
@@ -78,9 +78,26 @@
 <%@include file="../../include/js.jsp"%>
 <script src="/static/plugins/treegrid/js/jquery.treegrid.min.js"></script>
 <script src="/static/plugins/treegrid/js/jquery.treegrid.bootstrap3.js"></script>
+<script src="/static/plugins/layer/layer.js"></script>
 <script>
     $(function () {
         $('.tree').treegrid();
+
+        $(".delLink").click(function () {
+            var id = $(this).attr("rel");
+            layer.confirm("确定要删除该角色？",function (index) {
+                layer.close(index);
+                $.get("/manage/roles/"+id+"/del").done(function (result) {
+                    if(result.status == 'success') {
+                        window.history.go(0);
+                    } else {
+                        layer.msg(result.message);
+                    }
+                }).error(function () {
+                    layer.msg("服务器忙");
+                });
+            })
+        });
     });
 </script>
 </body>

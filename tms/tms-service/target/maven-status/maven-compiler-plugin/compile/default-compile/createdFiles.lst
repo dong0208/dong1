@@ -1,2 +1,4 @@
 com\kaishengit\tms\service\AccountService.class
 com\kaishengit\tms\service\RolePermissionService.class
+com\kaishengit\tms\service\TicketStoreService.class
+com\kaishengit\tms\service\TicketService.class

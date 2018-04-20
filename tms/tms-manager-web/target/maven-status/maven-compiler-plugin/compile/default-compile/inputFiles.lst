@@ -1,5 +1,7 @@
 G:\gitwork\tms\tms-manager-web\src\main\java\com\kaishengit\tms\controller\RoleController.java
+G:\gitwork\tms\tms-manager-web\src\main\java\com\kaishengit\tms\controller\TicketStoreController.java
 G:\gitwork\tms\tms-manager-web\src\main\java\com\kaishengit\tms\controller\AccountController.java
 G:\gitwork\tms\tms-manager-web\src\main\java\com\kaishengit\tms\controller\PermissionController.java
 G:\gitwork\tms\tms-manager-web\src\main\java\com\kaishengit\tms\controller\HomeController.java
 G:\gitwork\tms\tms-manager-web\src\main\java\com\kaishengit\tms\shiro\ShiroRealm.java
+G:\gitwork\tms\tms-manager-web\src\main\java\com\kaishengit\tms\shiro\CustomerFilterChainDefinition.java

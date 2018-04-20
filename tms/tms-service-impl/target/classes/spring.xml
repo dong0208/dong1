@@ -35,7 +35,7 @@
     <!--MyBatis SqlSessionFactoryBean-->
     <bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="typeAliasesPackage" value="com.kaishengit.entity"/>
+        <property name="typeAliasesPackage" value="com.kaishengit.tms.entity"/>
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
         <property name="configuration">
             <bean class="org.apache.ibatis.session.Configuration">
