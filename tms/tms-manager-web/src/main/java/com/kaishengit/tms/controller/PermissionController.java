@@ -3,7 +3,7 @@ package com.kaishengit.tms.controller;
 
 import com.kaishengit.tms.dto.ResponseBean;
 import com.kaishengit.tms.entity.Permission;
-import com.kaishengit.tms.exception.ServiceException;
+import com.kaishengit.tms.controller.exception.ServiceException;
 import com.kaishengit.tms.service.RolePermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,6 +32,7 @@ public class PermissionController {
     @GetMapping
     public String home(Model model){
        List<Permission> permissionList = rolePermissionService.findAllPermission();
+        System.out.println("permissionList :" + permissionList);
         model.addAttribute("permissionList",permissionList);
         return "manage/permission/home";
     }
@@ -66,10 +67,11 @@ public class PermissionController {
     public String updatePermission(@PathVariable Integer id,Model model){
        Permission permission = rolePermissionService.findAllPermissionById(id);
 
+
         model.addAttribute("permission",permission);
 
         return "manage/permission/edit";
-    }
+}
 
     @PostMapping("/{id:\\d+}/edit")
 

@@ -1,7 +1,9 @@
 package com.kaishengit.tms.service.impl;
 
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import com.kaishengit.tms.entity.*;
-import com.kaishengit.tms.exception.ServiceException;
+import com.kaishengit.tms.controller.exception.ServiceException;
 import com.kaishengit.tms.mapper.AccountRolesMapper;
 import com.kaishengit.tms.mapper.PermissionMapper;
 import com.kaishengit.tms.mapper.RolesMapper;
@@ -12,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 /* *
  *角色和权限的业务类
@@ -33,6 +37,7 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     private RolesPermissionMapper rolesPermissionMapper;
     @Autowired
     private AccountRolesMapper accountRolesMapper;
+
     /**
      * 查看所有权限
      *
@@ -43,9 +48,12 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     @Override
     public List<Permission> findAllPermission() {
         PermissionExample permissionExample = new PermissionExample();
-        return permissionMapper.selectByExample(permissionExample);
 
-
+        List<Permission> permissionList = permissionMapper.selectByExample(permissionExample);
+        List<Permission> resultList = new ArrayList<>();
+        treeList(permissionList,resultList,0);
+        System.out.println("resultList" + resultList);
+        return resultList;
     }
 
 
@@ -144,7 +152,7 @@ public class RolePermissionServiceImpl implements RolePermissionService {
     public void updatePermission(Permission permission, Integer id) {
         permission.setUpdateTime(new Date());
         permissionMapper.updateByPrimaryKeySelective(permission);
-        logger.info("修改账号 {}",permission);
+        logger.info("修改权限 {}",permission);
     }
 
     /**
@@ -278,7 +286,20 @@ public class RolePermissionServiceImpl implements RolePermissionService {
         }
         logger.info("修改角色 {}",roles);
     }
+    /**
+     * 将查询数据库的权限列表转换为树形集合结果
+     * @param sourceList 数据库查询出的集合
+     * @param endList 转换结束的结果集合
+     * @param parentId 父ID
+     */
+    private void treeList(List<Permission> sourceList, List<Permission> endList, int parentId) {
 
+        List<Permission> tempList = Lists.newArrayList(Collections2.filter(sourceList, permission -> permission.getParentId().equals(parentId)));
+        for(Permission permission : tempList) {
+            endList.add(permission);
+            treeList(sourceList,endList,permission.getId());
+        }
+    }
 
 }
 

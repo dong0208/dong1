@@ -1,10 +1,6 @@
 package com.kaishengit.tms.service.impl;
 
-import com.kaishengit.tms.entity.Account;
-import com.kaishengit.tms.entity.AccountExample;
-import com.kaishengit.tms.entity.AccountLoginLog;
-
-import com.kaishengit.tms.entity.AccountRolesKey;
+import com.kaishengit.tms.entity.*;
 
 import com.kaishengit.tms.mapper.AccountLoginLogMapper;
 import com.kaishengit.tms.mapper.AccountMapper;
@@ -15,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -113,6 +110,48 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void saveAccountLoginLog(AccountLoginLog accountLoginLog) {
         accountLoginLogMapper.insertSelective(accountLoginLog);
+    }
+
+    /**
+     * 根据id查找账号
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Account findAccountById(Integer id) {
+        return accountMapper.selectByPrimaryKey(id);
+    }
+
+    /**
+     * 修改账号
+     *
+     * @param account
+     * @param rolesIds 账号拥有的角色ID数组
+     */
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public void updateAccount(Account account, Integer[] rolesIds) {
+
+        account.setUpdateTime(new Date());
+        accountMapper.updateByPrimaryKeySelective(account);
+
+        //删除原有的账户和角色的关系
+        AccountRolesExample accountRolesExample = new AccountRolesExample();
+        accountRolesExample.createCriteria().andAccountIdEqualTo(account.getId());
+        accountRolesMapper.deleteByExample(accountRolesExample);
+
+        //新增账号，和角色关系
+        if(rolesIds != null){
+            for (Integer rolesId:rolesIds){
+
+                AccountRolesKey accountRolesKey = new AccountRolesKey();
+                accountRolesKey.setRolesId(rolesId);
+                accountRolesKey.setAccountId(account.getId());
+                accountRolesMapper.insertSelective(accountRolesKey);
+            }
+        }
+        logger.info("修改帐号 {}" ,account);
     }
 
 

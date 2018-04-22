@@ -1,3 +1,4 @@
+com\kaishengit\tms\entity\TicketInRecordExample$Criterion.class
 com\kaishengit\tms\entity\PermissionExample$Criteria.class
 com\kaishengit\tms\entity\RolesPermissionExample$Criterion.class
 com\kaishengit\tms\entity\StoreLoginLogExample.class
@@ -17,6 +18,8 @@ com\kaishengit\tms\entity\AccountRolesExample.class
 com\kaishengit\tms\entity\Customer.class
 com\kaishengit\tms\entity\AccountLoginLogExample$Criteria.class
 com\kaishengit\tms\entity\Ticket.class
+com\kaishengit\tms\entity\TicketInRecordExample$GeneratedCriteria.class
+com\kaishengit\tms\entity\TicketInRecordExample$Criteria.class
 com\kaishengit\tms\dto\ResponseBean.class
 com\kaishengit\tms\entity\TicketExample$Criteria.class
 com\kaishengit\tms\entity\PermissionExample$GeneratedCriteria.class
@@ -41,19 +44,20 @@ com\kaishengit\tms\entity\StoreLoginLog.class
 com\kaishengit\tms\entity\TicketExample$Criterion.class
 com\kaishengit\tms\entity\TicketStoreExample$GeneratedCriteria.class
 com\kaishengit\tms\entity\StoreAccount.class
-com\kaishengit\tms\exception\NotFoundException.class
 com\kaishengit\tms\entity\PermissionExample.class
+com\kaishengit\tms\entity\TicketInRecord.class
 com\kaishengit\tms\entity\AccountLoginLog.class
 com\kaishengit\tms\entity\StoreLoginLogExample$GeneratedCriteria.class
 com\kaishengit\tms\entity\RolesPermissionExample$GeneratedCriteria.class
 com\kaishengit\tms\entity\AccountRolesExample$GeneratedCriteria.class
 com\kaishengit\tms\entity\StoreAccountExample$Criteria.class
-com\kaishengit\tms\exception\ServiceException.class
 com\kaishengit\tms\entity\TicketOrderExample$Criteria.class
+com\kaishengit\tms\controller\exception\ServiceException.class
 com\kaishengit\tms\entity\TicketStoreExample$Criteria.class
 com\kaishengit\tms\entity\TicketOrderExample$Criterion.class
 com\kaishengit\tms\entity\TicketStoreExample$Criterion.class
 com\kaishengit\tms\entity\CustomerExample$Criterion.class
+com\kaishengit\tms\entity\TicketInRecordExample.class
 com\kaishengit\tms\entity\StoreLoginLogExample$Criterion.class
 com\kaishengit\tms\entity\AccountExample.class
 com\kaishengit\tms\entity\Account.class
@@ -61,3 +65,4 @@ com\kaishengit\tms\entity\AccountLoginLogExample$Criterion.class
 com\kaishengit\tms\entity\CustomerExample$Criteria.class
 com\kaishengit\tms\entity\Permission.class
 com\kaishengit\tms\entity\TicketExample$GeneratedCriteria.class
+com\kaishengit\tms\controller\exception\NotFoundException.class

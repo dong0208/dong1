@@ -4,8 +4,8 @@ import com.google.common.collect.Maps;
 import com.kaishengit.tms.dto.ResponseBean;
 import com.kaishengit.tms.entity.Permission;
 import com.kaishengit.tms.entity.Roles;
-import com.kaishengit.tms.exception.NotFoundException;
-import com.kaishengit.tms.exception.ServiceException;
+import com.kaishengit.tms.controller.exception.NotFoundException;
+import com.kaishengit.tms.controller.exception.ServiceException;
 import com.kaishengit.tms.service.RolePermissionService;
 
 import org.springframework.beans.factory.annotation.Autowired;

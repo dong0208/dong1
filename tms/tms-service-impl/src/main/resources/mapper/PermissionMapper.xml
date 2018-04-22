@@ -74,22 +74,22 @@
     url
   </sql>
   <select id="selectByExample" parameterType="com.kaishengit.tms.entity.PermissionExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from permission
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
+  select
+  <if test="distinct">
+    distinct
+  </if>
+  <include refid="Base_Column_List" />
+  from permission
+  <if test="_parameter != null">
+    <include refid="Example_Where_Clause" />
+  </if>
+  <if test="orderByClause != null">
+    order by ${orderByClause}
+  </if>
+</select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List" />""
     from permission
     where id = #{id,jdbcType=INTEGER}
   </select>

@@ -2,7 +2,6 @@ package com.kaishengit.tms.service;
 
 import com.kaishengit.tms.entity.Account;
 import com.kaishengit.tms.entity.AccountLoginLog;
-import com.kaishengit.tms.exception.ServiceException;
 
 import java.util.List;
 import java.util.Map;
@@ -39,4 +38,18 @@ public interface AccountService {
      * @param accountLoginLog
      */
     void saveAccountLoginLog(AccountLoginLog accountLoginLog);
+
+    /**
+     * 根据id查找账号
+     * @param id
+     * @return
+     */
+    Account findAccountById(Integer id);
+
+    /**
+     * 修改账号
+     * @param account
+     * @param rolesIds  账号拥有的角色ID数组
+     */
+    void updateAccount(Account account, Integer[] rolesIds);
 }
