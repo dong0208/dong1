@@ -73,15 +73,17 @@ public class AccountServiceImpl implements AccountService {
         //账号默认状态
         account.setAccountState(Account.STATE_NORMAL);
         accountMapper.insertSelective(account);
+        if(rolesIds != null){
+            //添加账号和角色的对应关系表
+            for(Integer roleId : rolesIds) {
+                AccountRolesKey accountRolesKey = new AccountRolesKey();
+                accountRolesKey.setAccountId(account.getId());
+                accountRolesKey.setRolesId(roleId);
+                accountRolesMapper.insert(accountRolesKey);
+            }
 
-        //添加账号和角色的对应关系表
-        for(Integer roleId : rolesIds) {
-            AccountRolesKey accountRolesKey = new AccountRolesKey();
-            accountRolesKey.setAccountId(account.getId());
-            accountRolesKey.setRolesId(roleId);
-
-            accountRolesMapper.insert(accountRolesKey);
         }
+
     }
 
     /**

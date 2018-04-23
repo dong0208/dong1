@@ -4,7 +4,6 @@ import com.kaishengit.tms.entity.Account;
 import com.kaishengit.tms.entity.AccountLoginLog;
 import com.kaishengit.tms.entity.Permission;
 import com.kaishengit.tms.entity.Roles;
-import com.kaishengit.tms.mapper.RolesPermissionMapper;
 import com.kaishengit.tms.service.AccountService;
 import com.kaishengit.tms.service.RolePermissionService;
 import org.apache.shiro.authc.AuthenticationException;

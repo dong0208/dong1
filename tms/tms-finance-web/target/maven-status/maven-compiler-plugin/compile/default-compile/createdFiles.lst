@@ -1,3 +1,4 @@
 com\kaishengit\tms\controller\HomeController.class
 com\kaishengit\tms\shiro\CustomerFilterChainDefinition.class
 com\kaishengit\tms\shiro\ShiroRealm.class
+com\kaishengit\tms\controller\TicketController.class

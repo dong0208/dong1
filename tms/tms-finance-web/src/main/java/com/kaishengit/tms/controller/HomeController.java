@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Ê×Ò³¼°µÇÂ¼¡¢µÇ³öµÄ¿ØÖÆÆ÷
- * @author fankay
+ * @author Ñî¶¬¶¬
  */
 @Controller
 public class HomeController {

@@ -36,7 +36,7 @@
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
     <!--6. 配置ShiroFilter id必须和web.xml中的filter节点的filter-name相同-->
-    <bean id="filterChainDefinition" class="com.kaishengit.tms.shiro.CustomerFilterChainDefinition">
+   <!-- <bean id="filterChainDefinition" class="com.kaishengit.tms.shiro.CustomerFilterChainDefinition">
         <property name="shiroFilter" ref="shiroFilter"/>
         <property name="filterChainDefinitions">
             <value>
@@ -45,7 +45,7 @@
                 /logout = logout
             </value>
         </property>
-    </bean>
+    </bean>-->
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
@@ -56,10 +56,6 @@
         <!--访问没有权限的资源跳转的URL-->
         <property name="unauthorizedUrl" value="/401"/>
     </bean>
-
-
-
-
 
 
 </beans>

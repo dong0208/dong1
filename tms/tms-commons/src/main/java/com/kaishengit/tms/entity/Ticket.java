@@ -8,6 +8,11 @@ import java.util.Date;
  * @author 
  */
 public class Ticket implements Serializable {
+    public static final String TICKET_STATE_IN_STORE = "已入库";
+    public static final String TICKET_STATE_OUT_STORE = "已下发";
+    public static final String TICKET_STATE_SALE = "已销售";
+    public static final String TICKET_STATE_LOST = "已挂失";
+    public static final String TICKET_STATE_OUT_DATE = "已过期";
     /**
      * 年票表
      */
@@ -145,5 +150,22 @@ public class Ticket implements Serializable {
 
     public void setCustomerId(Long customerId) {
         this.customerId = customerId;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", ticketNum='" + ticketNum + '\'' +
+                ", ticketInTime=" + ticketInTime +
+                ", ticketState='" + ticketState + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", ticketOutTime=" + ticketOutTime +
+                ", ticketValidityStart=" + ticketValidityStart +
+                ", ticketValidityEnd=" + ticketValidityEnd +
+                ", storeAccountId=" + storeAccountId +
+                ", customerId=" + customerId +
+                '}';
     }
 }
