@@ -48,7 +48,7 @@
                     <h3 class="box-title">售票点信息</h3>
                     <div class="box-tools">
                         <a href="/ticketstore/${ticketStore.id}/edit" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i> 编辑</a>
-                        <a href="javascript:;" rel="${ticketStore.id}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> 删除</a>
+                        <a href="javascript:;" rel="${ticketStore.id}"  class="btn btn-danger btn-sm delLink"><i class="fa fa-trash"></i> 删除</a>
                     </div>
                 </div>
                 <div class="box-body">
@@ -100,12 +100,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="photo">
-                                <img src="http://p7f6tjc1h.bkt.clouddn.com/${ticketStore.storeManagerAttachment}-preview" alt="">
+
+                                <img src="http://p7l4qj61d.bkt.clouddn.com/${ticketStore.storeManagerAttachment}" alt="">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="photo">
-                                <img src="http://p7f6tjc1h.bkt.clouddn.com/${ticketStore.storeAttachment}-preview" alt="">
+                                <img src="http://p7l4qj61d.bkt.clouddn.com/${ticketStore.storeAttachment}" alt="">
                             </div>
                         </div>
                     </div>
@@ -119,8 +120,25 @@
 <!-- ./wrapper -->
 
 <%@include file="../include/js.jsp"%>
+<script src="/static/plugins/layer/layer.js"></script>
 <script>
     $(function () {
+        $(".delLink").click(function () {
+            var id = $(this).attr("rel");
+            layer.confirm("确定要删除该销售点吗？",function (index) {
+                layer.close(index);
+                $.get("/ticketstore/"+id+"/del").done(function (result) {
+                    if(result.status == 'success') {
+
+                        location.href=document.referrer;
+                    } else {
+                        layer.msg(result.message);
+                    }
+                }).error(function () {
+                    layer.msg("服务器忙");
+                });
+            })
+        });
     });
 </script>
 </body>

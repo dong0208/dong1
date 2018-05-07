@@ -7,41 +7,67 @@ import com.kaishengit.tms.entity.TicketStore;
 import java.util.Map;
 
 /**
- * ÄêÆ±ÊÛÆ±µãÒµÎñÀà
+ *
  * @author fankay
  */
 public interface TicketStoreService {
+
     /**
-     * ´´½¨ĞÂµÄÊÛÆ±µã
+     *åˆ›å»ºæ–°çš„å”®ç¥¨ç‚¹
      * @param ticketStore
      */
     void saveNewTicktStore(TicketStore ticketStore);
 
+
     /**
-     * ¸ù¾İµ±Ç°Ò³ÃæºÍ²éÑ¯²ÎÊı²éÑ¯ÏúÊÛµã
+     *
+     *æ ¹æ®å½“å‰é¡µé¢å’ŒæŸ¥è¯¢å‚æ•°æŸ¥è¯¢å”®ç¥¨ç‚¹
      * @param pageNo
      * @param queryParam
      * @return
      */
     PageInfo<TicketStore> findAllTicketStoreByPage(Integer pageNo, Map<String, Object> queryParam);
-
     /**
-     * ¸ù¾İID²éÕÒ¶ÔÓ¦µÄÊÛÆ±µã
+     *æ ¹æ®idæŸ¥è¯¢å¯¹åº”çš„å”®ç¥¨ç‚¹
+     *
      * @param id
      * @return
      */
     TicketStore findTicketStoreById(Integer id);
 
     /**
-     * ¸ù¾İÖ÷¼ü²éÕÒÊÛÆ±µãÕËºÅ¶ÔÏó
+     *
+     *æ ¹æ®idæŸ¥è¯¢å”®ç¥¨ç‚¹è´¦å·
      * @param id
      * @return
      */
     StoreAccount findStoreAccountById(Integer id);
 
     /**
-     * ĞŞ¸ÄÊÛÆ±µã¶ÔÏó
+     *
+     *ä¿®æ”¹å”®ç¥¨ç‚¹
      * @param ticketStore
      */
     void updateTicketStore(TicketStore ticketStore);
+
+
+    /**
+     *
+     *æ ¹æ®å”®ç¥¨å¹´çš„idåˆ é™¤å”®ç¥¨ç‚¹å’Œå”®ç¥¨ç‚¹è´¦å·
+     * @param id
+     */
+    void delAccountStore(Integer id);
+
+    /**
+     * æ ¹æ®å”®ç¥¨ç‚¹IDä¿®æ”¹å”®ç¥¨ç‚¹è´¦æˆ·çš„çŠ¶æ€
+     * @param id
+     */
+    void editStoreAccountStatusById(Integer id);
+
+    /**
+     * æ ¹æ®å”®ç¥¨ç‚¹IDæŸ¥è¯¢å”®ç¥¨ç‚¹è´¦æˆ·
+     * @param id
+     * @return
+     */
+    StoreAccount findStoreAccountByTicketStoreId(Integer id);
 }

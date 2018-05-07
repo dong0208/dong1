@@ -10,9 +10,9 @@ import java.util.List;
  */
 public class Account implements Serializable {
 
-    public static final String STATE_NORMAL = "正常";
-    public static final String STATE_DISABLE = "禁用";
-    public static final String STATE_LOCKED = "锁定";
+    public static final String STATE_NORMAL ="NORMAL";
+    public static final String STATE_DISABLE = "DISABLE";
+    public static final String STATE_LOCKED = "LOCKED";
     /**
      * 主键，un表示无符号，没有负数
 

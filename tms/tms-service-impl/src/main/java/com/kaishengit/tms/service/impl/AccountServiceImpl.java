@@ -19,8 +19,8 @@ import java.util.Map;
 
 
 /*
- *系统账号的业务类
- * @author 杨冬冬  
+ *
+ * @author
  * @date 2018/4/12
  */
 @Service
@@ -34,7 +34,7 @@ public class AccountServiceImpl implements AccountService {
     private AccountRolesMapper accountRolesMapper;
 
     /**
-     * gen据前端传来的参数，来查询所有账号并加载对应的角色列表
+     *
      *
      * @param requestParam
      * @return java.lang.Object
@@ -47,7 +47,7 @@ public class AccountServiceImpl implements AccountService {
 
 
     /**
-     * 新增账号
+     *
      *
      * @param account
      * @param rolesIds
@@ -57,7 +57,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void saveAccount(Account account, Integer[] rolesIds) {
         account.setCreateTime(new Date());
-        //账号默认密码为手机号码的后6位
+        //
         String password;
         if(account.getAccountMobile().length() <= 6) {
             password = account.getAccountMobile();
@@ -65,16 +65,16 @@ public class AccountServiceImpl implements AccountService {
             password = account.getAccountMobile().substring(account.getAccountMobile().length()-6,account.getAccountMobile().length());
 
         }
-        //对密码进行MD5加密
+        //
         password = DigestUtils.md5Hex(password);
 
         account.setAccountPassword(password);
 
-        //账号默认状态
+        //
         account.setAccountState(Account.STATE_NORMAL);
         accountMapper.insertSelective(account);
         if(rolesIds != null){
-            //添加账号和角色的对应关系表
+            //
             for(Integer roleId : rolesIds) {
                 AccountRolesKey accountRolesKey = new AccountRolesKey();
                 accountRolesKey.setAccountId(account.getId());
@@ -87,7 +87,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     /**
-     * 根据手机号查找登录对象
+     *
      *
      * @param userMobile
      * @return
@@ -105,9 +105,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     /**
-     * 保存日志
      *
-     * @param accountLoginLog 登录日志对象
+     *
+     * @param accountLoginLog
      */
     @Override
     public void saveAccountLoginLog(AccountLoginLog accountLoginLog) {
@@ -115,7 +115,7 @@ public class AccountServiceImpl implements AccountService {
     }
 
     /**
-     * 根据id查找账号
+     *
      *
      * @param id
      * @return
@@ -126,10 +126,10 @@ public class AccountServiceImpl implements AccountService {
     }
 
     /**
-     * 修改账号
+     *
      *
      * @param account
-     * @param rolesIds 账号拥有的角色ID数组
+     * @param rolesIds
      */
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
@@ -138,12 +138,12 @@ public class AccountServiceImpl implements AccountService {
         account.setUpdateTime(new Date());
         accountMapper.updateByPrimaryKeySelective(account);
 
-        //删除原有的账户和角色的关系
+        //
         AccountRolesExample accountRolesExample = new AccountRolesExample();
         accountRolesExample.createCriteria().andAccountIdEqualTo(account.getId());
         accountRolesMapper.deleteByExample(accountRolesExample);
 
-        //新增账号，和角色关系
+        //
         if(rolesIds != null){
             for (Integer rolesId:rolesIds){
 
@@ -153,7 +153,7 @@ public class AccountServiceImpl implements AccountService {
                 accountRolesMapper.insertSelective(accountRolesKey);
             }
         }
-        logger.info("修改帐号 {}" ,account);
+        logger.info(" {}" ,account);
     }
 
 

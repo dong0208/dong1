@@ -23,7 +23,7 @@ public class RoleController {
     @Autowired
     private RolePermissionService rolePermissionService;
 /*
- *查找角色对应权限
+ *
  * @date 2018/4/18
  * @param [model]
  * @return java.lang.String
@@ -35,8 +35,8 @@ public class RoleController {
     }
 
     /*
-     *新增角色
-     * 查询权限列表
+     *
+     *
      * @date 2018/4/15
      * @param [model]
      * @return java.lang.String
@@ -50,11 +50,11 @@ public class RoleController {
     @PostMapping("/new")
     public String newRole(Roles roles, Integer[] permissionId, RedirectAttributes redirectAttributes){
         rolePermissionService.saveRole(roles,permissionId);
-        redirectAttributes.addFlashAttribute("message","新增成功");
+        redirectAttributes.addFlashAttribute("message","锟斤拷锟斤拷锟缴癸拷");
         return "redirect:/manage/roles";
     }
     /**
-     * 删除角色
+     *
      */
     @GetMapping("/{id:\\d+}/del")
 
@@ -68,23 +68,23 @@ public class RoleController {
         }
     }
     /*
-     *编辑角色
+     *
      * @date 2018/4/20
      * @param [id, model]
      * @return java.lang.String
      */
    @GetMapping("/{id:\\d+}/edit")
     public String updateRoles(@PathVariable Integer id,Model model){
-       //查询角色及角色拥有的权限
+       //
        Roles roles = rolePermissionService.findRolesWithPermissionById(id);
 
        if(roles == null) {
            throw new NotFoundException();
        }
-       //查询所有的权限列表
+       //
        List<Permission> permissionList = rolePermissionService.findAllPermission();
 
-       //判断权限列表是否该被checked
+       //
        Map<Permission,Boolean> map = checkdPermissionList(roles.getPermissionList(),permissionList);
 
        model.addAttribute("roles",roles);
@@ -93,7 +93,7 @@ public class RoleController {
    }
 
     /*
-     *在编辑页面判断当前权限的复选框是否被checked
+     *
      * @date 2018/4/20
      * @param
      * @return
@@ -119,7 +119,7 @@ public class RoleController {
                             RedirectAttributes redirectAttributes) {
         rolePermissionService.updateRoles(roles,permissionId);
 
-        redirectAttributes.addFlashAttribute("message","角色修改成功");
+        redirectAttributes.addFlashAttribute("message","");
         return "redirect:/manage/roles";
     }
 

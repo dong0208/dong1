@@ -117,7 +117,18 @@
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.21</version>
         </dependency>
-
+        <!--jedis-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+        <!--gson-->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.8.1</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>mybatis-spring-springmvc</finalName>

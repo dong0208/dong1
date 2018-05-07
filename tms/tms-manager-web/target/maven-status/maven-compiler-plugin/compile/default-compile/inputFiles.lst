@@ -5,6 +5,7 @@ G:\gitwork\tms\tms-manager-web\src\main\java\com\kaishengit\tms\controller\Accou
 G:\gitwork\tms\tms-manager-web\src\main\java\com\kaishengit\tms\controller\exception\NotFoundException.java
 G:\gitwork\tms\tms-manager-web\src\main\java\com\kaishengit\tms\controller\PermissionController.java
 G:\gitwork\tms\tms-manager-web\src\main\java\com\kaishengit\tms\controller\exception\ControllerAdviceHandler.java
+G:\gitwork\tms\tms-manager-web\src\main\java\com\kaishengit\tms\fileStore\QiniuStore.java
 G:\gitwork\tms\tms-manager-web\src\main\java\com\kaishengit\tms\controller\HomeController.java
 G:\gitwork\tms\tms-manager-web\src\main\java\com\kaishengit\tms\shiro\ShiroRealm.java
 G:\gitwork\tms\tms-manager-web\src\main\java\com\kaishengit\tms\shiro\CustomerFilterChainDefinition.java

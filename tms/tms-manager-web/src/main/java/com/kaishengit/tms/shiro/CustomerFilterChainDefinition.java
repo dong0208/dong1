@@ -14,9 +14,9 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
 
-/*
- *¶¯Ì¬¶¨ÒåÈ¨ÏŞºÍURLµÄ¹ØÏµ
- * @author Ñî¶¬¶¬
+/*é
+ *
+ * @author
  * @date 2018/4/18
  */
 public class CustomerFilterChainDefinition {
@@ -36,38 +36,38 @@ public class CustomerFilterChainDefinition {
         this.shiroFilter = shiroFilter;
     }
     /**
-     * SpringÈİÆ÷Æô¶¯Ê±µ÷ÓÃ
+     * Spring
      */
     @PostConstruct
     public synchronized void init() {
-        logger.info("------³õÊ¼»¯URLÈ¨ÏŞ-----------");
-        //Çå³ıÔ­ÓĞµÄURLÈ¨ÏŞ
+        logger.info("-----------------");
+        //
         getFilterChainManager().getFilterChains().clear();
-        //¼ÓÔØÏÖÓĞµÄURLÈ¨ÏŞ
+        //
         load();
-        logger.info("------³õÊ¼»¯URLÈ¨ÏŞ½áÊø-----------");
+        logger.info("-----------------");
     }
 
     /**
-     * ÖØĞÂ¼ÓÔØURLÈ¨ÏŞ
+     *
      */
     public synchronized void updateUrlPermission() {
-        logger.info("------Ë¢ĞÂURLÈ¨ÏŞ-----------");
-        //Çå³ıÔ­ÓĞµÄURLÈ¨ÏŞ
+        logger.info("------Ë¢-----------");
+        //
         getFilterChainManager().getFilterChains().clear();
-        //¼ÓÔØÏÖÓĞµÄURLÈ¨ÏŞ
+        //
         load();
-        logger.info("------Ë¢ĞÂURLÈ¨ÏŞ½áÊø-----------");
+        logger.info("------Ë¢-----------");
     }
 
     /**
-     * ¼ÓÔØURLºÍÈ¨ÏŞµÄ¶ÔÓ¦¹ØÏµ
+     *
      */
     public synchronized void load() {
         Ini ini = new Ini();
         ini.load(filterChainDefinitions);
 
-        //´ÓÊı¾İ¿âÖĞ²éÕÒËùÓĞµÄÈ¨ÏŞ¶ÔÏó
+        //
         List<Permission> permissionList = rolePermissionService.findAllPermission();
         Ini.Section section = ini.get(Ini.DEFAULT_SECTION_NAME);
 
@@ -76,7 +76,7 @@ public class CustomerFilterChainDefinition {
         }
         section.put("/**","user");
 
-        //URLºÍÈ¨ÏŞµÄ¹ØÏµÉèÖÃµ½shiroFilterÖĞ
+        //
         DefaultFilterChainManager defaultFilterChainManager = getFilterChainManager();
         for(Map.Entry<String,String> entry : section.entrySet()) {
             defaultFilterChainManager.createChain(entry.getKey(),entry.getValue());

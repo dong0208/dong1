@@ -6,13 +6,7 @@ import com.kaishengit.tms.entity.Permission;
 import com.kaishengit.tms.entity.Roles;
 import com.kaishengit.tms.service.AccountService;
 import com.kaishengit.tms.service.RolePermissionService;
-import org.apache.shiro.authc.AuthenticationException;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.LockedAccountException;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -23,82 +17,77 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
-public class ShiroRealm extends AuthorizingRealm {
+public class ShiroRealm extends AuthorizingRealm{
 
     private Logger logger = LoggerFactory.getLogger(ShiroRealm.class);
-
     @Autowired
     private AccountService accountService;
-
     @Autowired
     private RolePermissionService rolePermissionService;
 
     /**
-     * ÅĞ¶Ï½ÇÉ«ºÍÈ¨ÏŞ
+     * åˆ¤æ–­è§’è‰²å’Œæƒé™
      * @param principalCollection
      * @return
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        //»ñÈ¡µ±Ç°µÇÂ¼µÄ¶ÔÏó
+
+        //è·å¾—å½“å‰çš„ç™»é™†å¯¹å¯¹è±¡
         Account account = (Account) principalCollection.getPrimaryPrincipal();
-        //»ñÈ¡µ±Ç°µÇÂ¼¶ÔÏóÓµÓĞµÄ½ÇÉ«
+        //è·å¾—å½“å‰ç™»å½•å¯¹è±¡æ‹¥æœ‰çš„è§’è‰²
         List<Roles> rolesList = rolePermissionService.findRolesByAccountId(account.getId());
-        //»ñÈ¡µ±Ç°µÇÂ¼¶ÔÏóÓµÓĞµÄÈ¨ÏŞ
+        //è·å–å½“å‰å¯¹è±¡æ‹¥æœ‰çš„æƒé™
         List<Permission> permissionList = new ArrayList<>();
-        for(Roles roles : rolesList) {
+        for (Roles roles : rolesList){
             List<Permission> rolesPermissionList = rolePermissionService.findAllPermissionByRolesId(roles.getId());
             permissionList.addAll(rolesPermissionList);
         }
-
-        Set<String> rolesNameSet = new HashSet<>();
-        for(Roles roles : rolesList) {
+        Set <String> rolesNameSet = new HashSet<>();
+        for (Roles roles : rolesList){
             rolesNameSet.add(roles.getRolesCode());
         }
-
-        Set<String> permissionNameSet = new HashSet<>();
-        for(Permission permission : permissionList) {
+        Set <String> permissionNameSet = new HashSet<>();
+        for (Permission permission:permissionList){
             permissionNameSet.add(permission.getPermissionCode());
         }
 
-        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        //µ±Ç°ÓÃ»§ÓµÓĞµÄ½ÇÉ«£¨code£©
-        simpleAuthorizationInfo.setRoles(rolesNameSet);
-        //µ±Ç°ÓÃ»§ÓµÓĞµÄÈ¨ÏŞ(code)
-        simpleAuthorizationInfo.setStringPermissions(permissionNameSet);
-        return simpleAuthorizationInfo;
+        SimpleAuthorizationInfo simpleAuthenticationInfo = new SimpleAuthorizationInfo();
+        //å½“å‰å¯¹è±¡æ‹¥æœ‰çš„è§’è‰²code
+        simpleAuthenticationInfo.setRoles(rolesNameSet);
+        //å½“å‰å¯¹è±¡æ‹¥æœ‰çš„æƒé™
+        simpleAuthenticationInfo.setStringPermissions(permissionNameSet);
+        return simpleAuthenticationInfo;
     }
 
 
-
     /**
-     * ÅĞ¶ÏµÇÂ¼
+     * åˆ¤æ–­ç™»é™†
      * @param authenticationToken
      * @return
      * @throws AuthenticationException
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) authenticationToken;
-        String userMobile = usernamePasswordToken.getUsername();
-        if(userMobile != null) {
-            Account account = accountService.findByMobile(userMobile);
-            if(account == null) {
-                throw new UnknownAccountException("ÕÒ²»µ½¸ÃÕËºÅ:" + userMobile);
-            } else {
-                if(Account.STATE_NORMAL.equals(account.getAccountState())) {
-                    logger.info("{} µÇÂ¼³É¹¦: {}",account,usernamePasswordToken.getHost());
+        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken)authenticationToken;
 
-                    //±£´æµÇÂ¼ÈÕÖ¾
+        String userMobile = usernamePasswordToken.getUsername();
+        if (userMobile != null){
+            Account account = accountService.findByMobile(userMobile);
+            if (account == null){
+                throw new UnknownAccountException("Can't find the accountï¼š"+userMobile);
+            }else{
+                if (Account.STATE_NORMAL.equals(account.getAccountState())){
+                    logger.info("{} ç™»å½•æˆåŠŸ:{}",account,usernamePasswordToken.getHost());
+                    //ä¿å­˜ç™»é™†æ—¥å¿—
                     AccountLoginLog accountLoginLog = new AccountLoginLog();
-                    accountLoginLog.setLoginTime(new Date());
-                    accountLoginLog.setLoginIp(usernamePasswordToken.getHost());
                     accountLoginLog.setAccountId(account.getId());
-                    accountService.saveAccountLoginLog(accountLoginLog);
+                    accountLoginLog.setLoginIp(usernamePasswordToken.getHost());
+                    accountLoginLog.setLoginTime(new Date());
 
                     return new SimpleAuthenticationInfo(account,account.getAccountPassword(),getName());
-                } else {
-                    throw new LockedAccountException("ÕËºÅ±»½ûÓÃ»òËø¶¨:" + account.getAccountState());
+                }else{
+                    throw new LockedAccountException("Account is disabled or locked:"+account.getAccountState());
                 }
             }
         }

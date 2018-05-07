@@ -6,9 +6,11 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.util.SavedRequest;
+
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -17,8 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 
 
 /**
- * 首页及登录、登出的控制器
- * @author 杨冬冬
+ *
+ * @author
  */
 @Controller
 public class HomeController {
@@ -27,7 +29,7 @@ public class HomeController {
     private AccountService accountService;
 
     /**
-     * 系统登录页面
+     *
      * @return
      */
     @GetMapping("/")
@@ -36,7 +38,7 @@ public class HomeController {
     }
 
     /**
-     * 系统登录
+     *
      * @return
      */
     @PostMapping("/")
@@ -46,16 +48,16 @@ public class HomeController {
                         HttpServletRequest request,
                         RedirectAttributes redirectAttributes) {
 
-        // 创建Subject对象
+        //
         Subject subject = SecurityUtils.getSubject();
-        // 根据账号和密码进行登录
+        //
         String requestIp = request.getRemoteAddr();
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(accountMobile,DigestUtils.md5Hex(password),rememberMe!=null,requestIp);
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(accountMobile, DigestUtils.md5Hex(password),rememberMe!=null,requestIp);
 
         try {
             subject.login(usernamePasswordToken);
 
-            //登录后跳转目标的判断
+            //
             SavedRequest savedRequest = WebUtils.getSavedRequest(request);
             String url = "/home";
             if(savedRequest != null) {
@@ -65,19 +67,19 @@ public class HomeController {
             return "redirect:"+url;
         } catch (UnknownAccountException | IncorrectCredentialsException ex) {
             ex.printStackTrace();
-            redirectAttributes.addFlashAttribute("message","账号或密码错误");
+            redirectAttributes.addFlashAttribute("message","");
         } catch (LockedAccountException ex) {
             ex.printStackTrace();
-            redirectAttributes.addFlashAttribute("message","账号被锁定");
+            redirectAttributes.addFlashAttribute("message","");
         } catch (AuthenticationException ex) {
             ex.printStackTrace();
-            redirectAttributes.addFlashAttribute("message","账号或密码错误");
+            redirectAttributes.addFlashAttribute("message","");
         }
         return "redirect:/";
     }
 
     /**
-     * 登录后的首页
+     *
      * @return
      */
     @GetMapping("/home")

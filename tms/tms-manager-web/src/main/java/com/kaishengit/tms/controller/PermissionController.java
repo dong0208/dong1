@@ -14,8 +14,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 /*
- *权限控制器
- * @author 杨冬冬
+ *
+ * @author
  * @date 2018/4/13
  */
 @Controller
@@ -24,7 +24,7 @@ public class PermissionController {
     @Autowired
     private RolePermissionService rolePermissionService;
     /*  
-     *权限的首页
+
      * @date 2018/4/13
      * @param [model]  
      * @return java.lang.String  
@@ -37,14 +37,14 @@ public class PermissionController {
         return "manage/permission/home";
     }
     /*  
-     *新增权限
+     *
      * @date 2018/4/13
      * @param [model]  
      * @return java.lang.String  
      */ 
     @GetMapping("/new")
     public  String newPermission(Model model){
-        //查询菜单类型的权限列表
+        //
         List<Permission> permissionList = rolePermissionService.findPermissionByPermissionType(Permission.MENU_TYPE);
         model.addAttribute("permissionList",permissionList);
 
@@ -53,12 +53,12 @@ public class PermissionController {
     @PostMapping("/new")
     public  String newPermission(Permission permission, RedirectAttributes redirectAttributes){
             rolePermissionService.savePermission(permission);
-            redirectAttributes.addFlashAttribute("message","新增权限成功");
+            redirectAttributes.addFlashAttribute("message","锟斤拷锟斤拷权锟睫成癸拷");
             return "redirect:/manage/permission";
 
     }
     /*
-     *修改?限
+     *
      * @date 2018/4/17
      * @param [id, model]
      * @return java.lang.String
@@ -77,12 +77,12 @@ public class PermissionController {
 
     public String updatePermission(Permission permission,Integer id,RedirectAttributes redirectAttributes){
         rolePermissionService.updatePermission(permission,id);
-        redirectAttributes.addFlashAttribute("message","修改成功");
+        redirectAttributes.addFlashAttribute("message","锟睫改成癸拷");
         return "redirect:/manage/permission";
     }
 
     /*
-     *删除权限
+     *
      * @date 2018/4/17
      * @param [id]
      * @return com.kaishengit.tms.dto.ResponseBean

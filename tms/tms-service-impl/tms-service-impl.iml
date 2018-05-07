@@ -2,7 +2,14 @@
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="Spring Dubbo" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/spring-dubbo.xml</file>
+        </fileset>
+        <fileset id="fileset2" name="Spring" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/spring.xml</file>
+        </fileset>
+      </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
@@ -62,5 +69,13 @@
     <orderEntry type="library" name="Maven: com.google.j2objc:j2objc-annotations:1.1" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.mojo:animal-sniffer-annotations:1.14" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.9.9" level="project" />
+    <orderEntry type="library" name="Maven: com.alibaba:dubbo:2.6.1" level="project" />
+    <orderEntry type="library" name="Maven: org.javassist:javassist:3.20.0-GA" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.netty:netty:3.2.5.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.curator:curator-framework:2.12.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.curator:curator-client:2.12.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.zookeeper:zookeeper:3.4.8" level="project" />
+    <orderEntry type="library" name="Maven: jline:jline:0.9.94" level="project" />
+    <orderEntry type="library" name="Maven: io.netty:netty:3.7.0.Final" level="project" />
   </component>
 </module>

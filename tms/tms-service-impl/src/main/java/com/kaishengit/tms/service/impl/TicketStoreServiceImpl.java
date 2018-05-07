@@ -10,6 +10,8 @@ import com.kaishengit.tms.mapper.TicketStoreMapper;
 import com.kaishengit.tms.service.TicketStoreService;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,20 +21,20 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * ÄêÆ±ÊÛÆ±µãÒµÎñ²ã
- * @author fankay
+ *å¹´ç¥¨å”®ç¥¨ç‚¹ä¸šåŠ¡
+ * @author
  */
 @Service
 public class TicketStoreServiceImpl implements TicketStoreService {
 
-
+   Logger logger = LoggerFactory.getLogger(TicketStoreServiceImpl.class);
     @Autowired
     private TicketStoreMapper ticketStoreMapper;
     @Autowired
     private StoreAccountMapper storeAccountMapper;
 
     /**
-     * ´´½¨ĞÂµÄÊÛÆ±µã
+     *åˆ›å»ºæ–°çš„å”®ç¥¨ç‚¹
      * @param ticketStore
      */
     @Override
@@ -41,11 +43,12 @@ public class TicketStoreServiceImpl implements TicketStoreService {
         ticketStore.setCreateTime(new Date());
         ticketStoreMapper.insertSelective(ticketStore);
 
-        //´´½¨ÊÛÆ±µãÕËºÅ
+        //åˆ›å»ºå”®ç¥¨ç‚¹è´¦å·
         StoreAccount storeAccount = new StoreAccount();
         storeAccount.setId(ticketStore.getId());
+        storeAccount.setTicketStoreId(storeAccount.getId());
         storeAccount.setStoreAccount(ticketStore.getStoreTel());
-        //Ä¬ÈÏÃÜÂëÎªÊÖ»úºÅÂëºóÁùÎ»
+        //é»˜è®¤å¯†ç ä¸ºæ‰‹æœºå·çš„å6ä½
         storeAccount.setStorePassword(DigestUtils.md5Hex(ticketStore.getStoreTel().substring(5)));
         storeAccount.setCreateTime(new Date());
         storeAccount.setStoreState(StoreAccount.ACCOUNT_STATE_NORMAL);
@@ -54,8 +57,8 @@ public class TicketStoreServiceImpl implements TicketStoreService {
     }
 
     /**
-     * ¸ù¾İµ±Ç°Ò³ÃæºÍ²éÑ¯²ÎÊı²éÑ¯ÏúÊÛµã
      *
+     *æ ¹æ®å½“å‰é¡µé¢å’ŒæŸ¥è¯¢å‚æ•°æŸ¥è¯¢å”®ç¥¨ç‚¹
      * @param pageNo
      * @param queryParam
      * @return
@@ -86,7 +89,7 @@ public class TicketStoreServiceImpl implements TicketStoreService {
     }
 
     /**
-     * ¸ù¾İID²éÕÒ¶ÔÓ¦µÄÊÛÆ±µã
+     *æ ¹æ®idæŸ¥è¯¢å¯¹åº”çš„å”®ç¥¨ç‚¹
      *
      * @param id
      * @return
@@ -97,8 +100,8 @@ public class TicketStoreServiceImpl implements TicketStoreService {
     }
 
     /**
-     * ¸ù¾İÖ÷¼ü²éÕÒÊÛÆ±µãÕËºÅ¶ÔÏó
      *
+     *æ ¹æ®idæŸ¥è¯¢å”®ç¥¨ç‚¹è´¦å·
      * @param id
      * @return
      */
@@ -108,8 +111,8 @@ public class TicketStoreServiceImpl implements TicketStoreService {
     }
 
     /**
-     * ĞŞ¸ÄÊÛÆ±µã¶ÔÏó
      *
+     *ä¿®æ”¹å”®ç¥¨ç‚¹
      * @param ticketStore
      */
     @Override
@@ -117,12 +120,12 @@ public class TicketStoreServiceImpl implements TicketStoreService {
     public void updateTicketStore(TicketStore ticketStore) {
         ticketStore.setUpdateTime(new Date());
 
-        //ÅĞ¶ÏÊÇ·ñĞŞ¸ÄÁËÁªÏµµç»°
+        //åˆ¤æ–­æ˜¯å¦ä¿®æ”¹äº†è”ç³»ç”µè¯
         StoreAccount storeAccount = storeAccountMapper.selectByPrimaryKey(ticketStore.getId());
         if(!ticketStore.getStoreTel().equals(storeAccount.getStoreAccount())) {
-            //Èç¹ûĞŞ¸ÄµÄµç»°£¬ÔòĞèÒªÍ¬²½ĞŞ¸ÄÕËºÅ
+            //å¦‚æœä¿®æ”¹äº†ç”µè¯ï¼Œåˆ™åŒæ­¥ä¿®æ”¹è´¦å·
             storeAccount.setStoreAccount(ticketStore.getStoreTel());
-            //ÖØĞÂÉèÖÃÃÜÂë
+            //é‡è®¾å¯†ç 
             storeAccount.setStorePassword(DigestUtils.md5Hex(ticketStore.getStoreTel().substring(5)));
             storeAccount.setUpdateTime(new Date());
 
@@ -131,4 +134,46 @@ public class TicketStoreServiceImpl implements TicketStoreService {
 
         ticketStoreMapper.updateByPrimaryKeySelective(ticketStore);
     }
+
+    /**
+     *
+     *æ ¹æ®å”®ç¥¨å¹´çš„idåˆ é™¤å”®ç¥¨ç‚¹å’Œå”®ç¥¨ç‚¹è´¦å·
+     * @param id
+     */
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public void delAccountStore(Integer id) {
+       TicketStore ticketStore = ticketStoreMapper.selectByPrimaryKey(id);
+       ticketStoreMapper.deleteByPrimaryKey(id);
+
+       storeAccountMapper.deleteByPrimaryKey(id);
+        logger.info("åˆ é™¤æˆåŠŸ {}",ticketStore);
+    }
+
+    /**
+     * æ ¹æ®å”®ç¥¨ç‚¹IDä¿®æ”¹å”®ç¥¨ç‚¹è´¦æˆ·çš„çŠ¶æ€
+     *
+     * @param id
+     */
+    @Override
+    public void editStoreAccountStatusById(Integer id) {
+        TicketStore ticketStore = ticketStoreMapper.selectByPrimaryKey(id);
+
+        StoreAccount storeAccount = storeAccountMapper.selectByPrimaryKey(ticketStore.getStoreAccountId());
+
+        storeAccount.setStoreState(StoreAccount.ACCOUNT_STATE_DISABLE);
+        storeAccountMapper.updateByPrimaryKeySelective(storeAccount);
+    }
+
+    /**
+     * æ ¹æ®å”®ç¥¨ç‚¹IDæŸ¥è¯¢å”®ç¥¨ç‚¹è´¦æˆ·
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public StoreAccount findStoreAccountByTicketStoreId(Integer id) {
+        return storeAccountMapper.selectByPrimaryKey(id);
+    }
+
 }

@@ -3,21 +3,19 @@ package com.kaishengit.tms.controller;
 import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
 import com.kaishengit.tms.controller.exception.NotFoundException;
+import com.kaishengit.tms.controller.exception.ServiceException;
+import com.kaishengit.tms.dto.ResponseBean;
 import com.kaishengit.tms.entity.StoreAccount;
 import com.kaishengit.tms.entity.TicketStore;
 import com.kaishengit.tms.fileStore.QiniuStore;
 import com.kaishengit.tms.service.TicketStoreService;
-import com.qiniu.util.Auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.jws.WebParam;
 import java.util.Map;
 
 @Controller
@@ -28,6 +26,7 @@ public class TicketStoreController {
     private TicketStoreService ticketStoreService;
     @Autowired
     private QiniuStore qiniuStore;
+
 
     @GetMapping
     public String home(Model model,
@@ -46,12 +45,12 @@ public class TicketStoreController {
     }
 
     /**
-     * –¬‘ˆ €∆±µ„
+     *
      * @return
      */
     @GetMapping("/new")
     public String newStore(Model model) {
-        //ªÒ»°∆ﬂ≈£Œƒº˛…œ¥´token
+        //
         String upToken = qiniuStore.getUploadToken();
         model.addAttribute("upToken",upToken);
         return "store/new";
@@ -60,12 +59,12 @@ public class TicketStoreController {
     @PostMapping("/new")
     public String newStore(TicketStore ticketStore, RedirectAttributes redirectAttributes) {
         ticketStoreService.saveNewTicktStore(ticketStore);
-        redirectAttributes.addFlashAttribute("message","–¬‘ˆ≥…π¶");
+        redirectAttributes.addFlashAttribute("message","ÔøΩÔøΩÔøΩÔøΩÔøΩ…πÔøΩ");
         return "redirect:/ticketstore";
     }
 
     /**
-     * ≤Èø¥ €∆±µ„œÍ«È
+     *
      * @param id
      * @return
      */
@@ -76,7 +75,7 @@ public class TicketStoreController {
         if(ticketStore == null) {
             throw new NotFoundException();
         }
-        //≤È’“πÿ¡™µƒ €∆±µ„’À∫≈
+        //
         StoreAccount storeAccount = ticketStoreService.findStoreAccountById(ticketStore.getId());
 
         model.addAttribute("storeAccount",storeAccount);
@@ -85,7 +84,7 @@ public class TicketStoreController {
     }
 
     /**
-     * ±‡º≠ €∆±µ„
+     *
      * @return
      */
     @GetMapping("/{id:\\d+}/edit")
@@ -95,7 +94,7 @@ public class TicketStoreController {
             throw new NotFoundException();
         }
 
-        //ªÒ»°∆ﬂ≈£…œ¥´µƒToken
+        //
         String uploadToken = qiniuStore.getUploadToken();
 
         model.addAttribute("uploadToken",uploadToken);
@@ -106,7 +105,36 @@ public class TicketStoreController {
     @PostMapping("/{id:\\d+}/edit")
     public String updateTicketStore(TicketStore ticketStore,RedirectAttributes redirectAttributes) {
         ticketStoreService.updateTicketStore(ticketStore);
-        redirectAttributes.addFlashAttribute("message","–ﬁ∏ƒ≥…π¶");
+        redirectAttributes.addFlashAttribute("message","");
         return "redirect:/ticketstore";
     }
+    @GetMapping("/{id:\\d+}/del")
+    public @ResponseBody ResponseBean delAccountStore(@PathVariable Integer id){
+        try {
+            ticketStoreService.delAccountStore(id);
+            return ResponseBean.success();
+        }catch (ServiceException ex){
+            return ResponseBean.error(ex.getMessage());
+        }
+
+    }
+
+    /**
+     * ‰øÆÊîπË¥¶Êà∑Áä∂ÊÄÅ
+     * @param id
+     * @param redirectAttributes
+     * @return
+     */
+    @GetMapping("/{id:\\d+}/status")
+    public String editAccountStatus(@PathVariable Integer id , RedirectAttributes redirectAttributes,
+                                    Model model){
+
+        ticketStoreService.editStoreAccountStatusById(id);
+
+        StoreAccount storeAccount = ticketStoreService.findStoreAccountByTicketStoreId(id);
+        model.addAttribute("storeAccount",storeAccount);
+
+        return "redirect:/ticketstore";
+    }
+
 }

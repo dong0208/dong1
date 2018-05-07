@@ -3,7 +3,7 @@ package com.kaishengit.tms.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 /**
- * Ajax请求返回的对象
+ * Ajax
  * @author fankay
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)

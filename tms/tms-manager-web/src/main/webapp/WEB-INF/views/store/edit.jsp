@@ -71,13 +71,13 @@
                             <div class="col-md-6">
                                 <div id="picker">选择联系人身份证照片</div>
                                 <div class="photo" id="userPhoto">
-                                    <img src="http://p7f6tjc1h.bkt.clouddn.com/${ticketStore.storeManagerAttachment}-preview" alt="">
+                                    <img src="http://p7l4qj61d.bkt.clouddn.com/${ticketStore.storeManagerAttachment}" alt="">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div id="picker2">选择营业执照照片</div>
                                 <div class="photo" id="storePhoto">
-                                    <img src="http://p7f6tjc1h.bkt.clouddn.com/${ticketStore.storeAttachment}-preview" alt="">
+                                    <img src="http://p7l4qj61d.bkt.clouddn.com/${ticketStore.storeAttachment}" alt="">
                                 </div>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
         uploader.on( 'uploadSuccess', function( file,response ) {
             $("#userPhoto").html("");
             var fileName = response.key;
-            var $img = $("<img>").attr("src","http://p7f6tjc1h.bkt.clouddn.com/"+fileName+"-preview");
+            var $img = $("<img>").attr("src","http://p7l4qj61d.bkt.clouddn.com/"+fileName);
             $img.appendTo($("#userPhoto"));
             //将key存放到隐藏域中
             $("#storeManagerAttachment").val(fileName);
@@ -172,7 +172,7 @@
         uploader2.on( 'uploadSuccess', function( file,response ) {
             $("#storePhoto").html("");
             var fileName = response.key;
-            var $img = $("<img>").attr("src","http://p7f6tjc1h.bkt.clouddn.com/"+fileName+"-preview");
+            var $img = $("<img>").attr("src","http://p7l4qj61d.bkt.clouddn.com/"+fileName);
             $img.appendTo($("#storePhoto"));
             //将key存放到隐藏域中
             $("#storeAttachment").val(fileName);
@@ -184,3 +184,7 @@
         uploader2.on( 'uploadComplete', function( file ) {
             layer.close(index);
         });
+    });
+</script>
+</body>
+</html>

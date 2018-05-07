@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 /*
  *
- * @author Ñî¶¬¶¬
+ * @author æ¨å†¬å†¬
  * @date 2018/4/16
  */
 @Controller
@@ -42,7 +42,7 @@ public class AccountController {
         return "manage/account/home";
     }
     /**
-     * ĞÂÔözhanghu
+     *æ–°å¢è§’è‰²
      * @param model
      * @return
      */
@@ -61,7 +61,7 @@ public class AccountController {
         return "redirect:/manage/account";
     }
     /**
-     * ĞŞ¸ÄÕËºÅ
+     * ä¿®æ”¹è´¦å·
      */
 
     @GetMapping("/{id:\\d+}/edit")
@@ -70,9 +70,9 @@ public class AccountController {
         if (account == null){
             throw  new NotFoundException();
         }
-        //²éÑ¯ËùÓĞ½ÇÉ«
+        //æŸ¥è¯¢æ‰€æœ‰è§’è‰²
         List<Roles> rolesList = rolePermissionService.findAllRoles();
-        //²éÑ¯µ±Ç°ÕËºÅÓµÓĞµÄ½ÇÉ«
+        //å½“å‰è´¦å·æ‹¥æœ‰çš„è§’è‰²
         List<Roles> accountRolesList = rolePermissionService.findRolesByAccountId(id);
         model.addAttribute("rolesList",rolesList);
         model.addAttribute("accountRolesList",accountRolesList);
@@ -83,7 +83,7 @@ public class AccountController {
     @PostMapping("/{id:\\d+}/edit")
     public String updateAccount(Account account, Integer[] rolesIds, RedirectAttributes redirectAttributes){
         accountService.updateAccount(account,rolesIds);
-        redirectAttributes.addFlashAttribute("message","ĞŞ¸ÄÕË»§³É¹¦");
+        redirectAttributes.addFlashAttribute("message","ä¿®æ”¹è´¦å·æˆåŠŸ");
         return "redirect:/manage/account";
     }
 }

@@ -1,8 +1,8 @@
 package com.kaishengit.tms.controller.exception;
 
 /**
- * “µŒÒ“Ï≥£
- * @author fankay
+ *
+ * @author
  */
 public class ServiceException extends RuntimeException {
 

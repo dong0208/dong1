@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 /*
  * 404
- * @author Ñî¶¬¶¬
+ * @author
  */
 @ResponseStatus(code = HttpStatus.NOT_FOUND)
 public class NotFoundException extends RuntimeException {

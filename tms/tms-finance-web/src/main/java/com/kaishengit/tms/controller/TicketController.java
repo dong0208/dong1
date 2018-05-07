@@ -65,6 +65,6 @@ public class TicketController {
         return "redirect:/ticket/storage";
 
     }
-    
+
 
 }
