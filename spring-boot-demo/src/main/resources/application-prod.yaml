@@ -1,0 +1,6 @@
+debug: false
+server:
+  port: 8889
+  context-path: /
+  session:
+    timeout: 3600

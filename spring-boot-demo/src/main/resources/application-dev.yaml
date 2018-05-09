@@ -1,0 +1,6 @@
+debug: false
+server:
+  port: 8888
+  context-path: /app
+  session:
+    timeout: 3600
